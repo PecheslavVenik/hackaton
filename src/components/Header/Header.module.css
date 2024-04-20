@@ -1,0 +1,43 @@
+.header{
+    padding: 20px 0;
+    background-color: rgb(254, 254, 254);
+}
+
+.container
+{
+    display: flex;
+    flex-direction: row;
+    width: 1318px;
+    top: 69px;
+    left: 141px;
+    gap: 0;
+    opacity: 0;
+    margin: auto;
+}
+
+.header_logo{
+    padding: 0  30px 0 0;
+
+}
+.header_nav{
+    display: flex;
+    flex-direction: row;
+}
+.header_nav__foto{
+    padding: 0  3px 0 0;
+}
+.header_nav__link{
+    padding: 0  20px 0 15px;
+}
+.header_nav__ikon{
+    padding: 0 5px ;
+}
+.header_nav__Polygon{
+    padding: 10px 4px;
+}
+
+.header_man{
+    display: flex;
+    flex-direction: row;
+    padding: 0 56px ;
+}
