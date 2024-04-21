@@ -1,8 +1,7 @@
-// Путь до файла: /components/RegionData/RegionData.tsx
 import React from "react";
-import styles from "./RegionData.module.css"; // Путь к стилям может варьироваться
+import styles from "./RegionData.module.css";
 import Image from "next/image";
-import Union from "@/assets/images/Union.svg"; // Пути к изображениям также могут варьироваться
+import Union from "@/assets/images/Union.svg";
 import suppliers from "@/assets/images/suppliers.svg";
 import people from "@/assets/images/people.svg";
 import circle from "@/assets/images/circle.svg";
@@ -10,7 +9,6 @@ import arrow from "@/assets/images/arrow.svg";
 import arrow2 from "@/assets/images/arrow2.svg";
 import { BBox } from "@/types/types";
 
-// Типизация пропсов, если вы используете TypeScript
 interface Region {
   id: string;
   pathD: string;

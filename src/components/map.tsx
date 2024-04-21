@@ -49,10 +49,16 @@ const SvgMap: React.FC<SvgMapProps> = ({ onSelectRegion }: SvgMapProps) => {
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
   const [tooltipContent, setTooltipContent] = useState("");
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  const [viewBox, setViewBox] = useSpring(() => ({ viewBox: "0 0 1500 900" }));
   const [markers, setMarkers] = useState<MarkerProps[]>([]);
   const pathRefs = useRef<Map<string, SVGPathElement | null>>(new Map());
   const [showRegionData, setShowRegionData] = useState(false);
+
+  const defaultViewBox = "0 0 1500 900";
+  const [viewBox, setViewBox] = useSpring(() => ({ viewBox: defaultViewBox }));
+  const resetViewBox = () => {
+    setViewBox.start({ viewBox: defaultViewBox });
+    setShowRegionData(false); // также скрывает компонент RegionData
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -153,6 +159,10 @@ const SvgMap: React.FC<SvgMapProps> = ({ onSelectRegion }: SvgMapProps) => {
               stroke="#D4DFF5"
               strokeWidth="1"
               onClick={() => handleRegionClick(region.id)}
+              ref={(el) => pathRefs.current.set(region.id, el)}
+              onMouseEnter={(event) =>
+                handleMouseEnter(event, region.id, region.fullName)
+              }
               onMouseLeave={handleMouseLeave}
               className="transition duration-150 ease-in-out cursor-pointer"
             />
