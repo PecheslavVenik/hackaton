@@ -1,8 +1,8 @@
-export interface RegionData {
-  id: string;
-  d: string;
-  title: string;
-  isConnected: boolean;
+export interface BBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 
 export interface TooltipData {

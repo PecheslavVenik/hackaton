@@ -1,0 +1,123 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/components/RegionData/RegionData.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+.RegionData_container__S2zlT {
+    width: 1318.1px;
+    top: 69px;
+    left: 141px;
+    /*opacity: 0;*/
+    margin: auto;
+    font-family: "Open Sans", sans-serif;
+}
+
+.RegionData_RegionData__container__hfG1Y {
+    width: 424px;
+    height: 679px;
+    top: 141px;
+    left: 140px;
+    /*opacity: 0;*/
+}
+
+.RegionData_RegionData__suppliers__tT34S {
+    width: 304px;
+    height: 60px;
+    top: 377px;
+    left: 141px;
+    border-radius: 5px 0px 0px 0px;
+    /*opacity: 0;*/
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.RegionData_RegionData__back__DeMkr {
+    display: flex;
+    font-size: 19px;
+    color: #264B82;
+    padding-top: 70px;
+}
+
+.RegionData_RegionData__back1__tsknI {
+    padding-top: 8px;
+    padding-right: 7px;
+}
+
+.RegionData_RegionData__lyg__7RVbL {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    text-align: left;
+    padding-top: 30px;
+}
+
+.RegionData_RegionData__lime__vNG4E {
+    font-family: Verdana;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.RegionData_box__I2iEd {
+    display: flex;
+    font-family: inherit;
+}
+
+.RegionData_RegionData__box2__3T_2q {
+    padding-top: 20px;
+}
+
+.RegionData_RegionData__Post__mi5r8 {
+    width: 90px;
+    height: 24px;
+    top: 377px;
+    left: 209px;
+    /*opacity: 0;*/
+}
+
+.RegionData_RegionData__eght__tpYF0 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40.85px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.RegionData_RegionData__seven__oyuKM {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 19.07px;
+    text-align: left;
+    color: #009A8D;
+}
+
+.RegionData_RegionData__BoxFin__LIw_3 {
+    width: 320px;
+    height: 151px;
+    top: 547px;
+    left: 140px;
+    background-color: rgb(255, 255, 255);
+    padding: 20px 9px;
+    /*opacity: 0;*/
+}
+
+.RegionData_RegionData__re__uzDpo {
+    padding-top: 30px;
+}
+
+.RegionData_RegionData__reg__LV8_A {
+    width: 312px;
+    height: 50px;
+    top: 770px;
+    left: 140px;
+    display: flex;
+    padding: 10px 15px;
+    margin: 20px 0;
+    background-color: #264B82;
+    color: white;
+}
+
+.RegionData_RegionData__arrow2__gHOb7 {
+    padding-top: 7px;
+}
+

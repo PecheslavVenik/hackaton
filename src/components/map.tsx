@@ -2,20 +2,32 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import regions from "../../svg-parser/regions.json";
+import { BBox } from "@/types/types";
+import RegionData from "@/components/RegionData/RegionData";
 
-// type RegionData = {
-//   id: string;
-//   pathD: string;
-//   hasInfo: boolean;
-//   fullName: string;
-// };
+interface Region {
+  id: string;
+  pathD: string;
+  hasInfo: boolean;
+  fullName: string;
+  img?: string;
+  bbox?: BBox;
+}
 
-const getRandomColor = () => {
+interface MarkerProps {
+  x: number;
+  y: number;
+  color: string;
+}
+
+const typedRegions: Region[] = regions as Region[];
+
+const getRandomColor = (): string => {
   const colors = ["red", "green", "blue", "yellow"];
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
-const Marker = ({ x, y, color }) => {
+const Marker: React.FC<MarkerProps> = ({ x, y, color }) => {
   const style = useSpring({
     from: { opacity: 0 },
     to: async (next, cancel) => {
@@ -28,13 +40,19 @@ const Marker = ({ x, y, color }) => {
   return <animated.circle cx={x} cy={y} r="5" fill={color} style={style} />;
 };
 
-const SvgMap = () => {
+interface SvgMapProps {
+  onSelectRegion: (region) => void;
+}
+
+const SvgMap: React.FC<SvgMapProps> = ({ onSelectRegion }: SvgMapProps) => {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
   const [tooltipContent, setTooltipContent] = useState("");
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [viewBox, setViewBox] = useSpring(() => ({ viewBox: "0 0 1500 900" }));
-  const [markers, setMarkers] = useState([]);
-  const pathRefs = useRef(new Map());
+  const [markers, setMarkers] = useState<MarkerProps[]>([]);
+  const pathRefs = useRef<Map<string, SVGPathElement | null>>(new Map());
+  const [showRegionData, setShowRegionData] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,20 +82,35 @@ const SvgMap = () => {
   }, [markers]);
 
   const handleRegionClick = (regionId: string) => {
-    const path = pathRefs.current.get(regionId);
-    if (path) {
-      const bbox = path.getBBox();
-      const centerX = bbox.x + bbox.width / 2;
-      const centerY = bbox.y + bbox.height / 2;
-      const newWidth = Math.max(bbox.width * 1.2, 300);
-      const newHeight = Math.max(bbox.height * 1.2, 300);
+    const regionData = typedRegions.find((region) => region.id === regionId);
+    if (regionData) {
+      setSelectedRegion(regionData); // Store the selected region
+      setShowRegionData(true); // Show the RegionData component
 
-      const newX = centerX - newWidth / 2;
-      const newY = centerY - newHeight / 2;
+      const path = pathRefs.current.get(regionId);
+      if (path) {
+        const bbox = path.getBBox();
+        const centerX = bbox.x + bbox.width / 2;
+        const centerY = bbox.y + bbox.height / 2;
+        const newWidth = Math.max(bbox.width * 1.1, 300);
+        const newHeight = Math.max(bbox.height * 1.1, 300);
 
-      setViewBox.start({ viewBox: `${newX} ${newY} ${newWidth} ${newHeight}` });
+        const newX = centerX - newWidth / 2;
+        const newY = centerY - newHeight / 2;
+
+        setViewBox.start({
+          viewBox: `${newX} ${newY} ${newWidth} ${newHeight}`,
+        });
+      } else {
+        console.error("No region found with the given ID");
+        setShowRegionData(false); // Убедитесь, что это состояние обрабатывается
+      }
     }
   };
+
+  useEffect(() => {
+    console.log("Show Region Data State:", showRegionData); // Для отладки
+  }, [showRegionData]);
 
   const handleMouseEnter = (
     event: React.MouseEvent<SVGPathElement, MouseEvent>,
@@ -103,7 +136,7 @@ const SvgMap = () => {
   };
 
   return (
-    <div className="container p-0 ">
+    <div className="container p-0">
       <animated.svg
         width="1500"
         height="900"
@@ -120,10 +153,6 @@ const SvgMap = () => {
               stroke="#D4DFF5"
               strokeWidth="1"
               onClick={() => handleRegionClick(region.id)}
-              ref={(el) => pathRefs.current.set(region.id, el)}
-              onMouseEnter={(event) =>
-                handleMouseEnter(event, region.id, region.fullName)
-              }
               onMouseLeave={handleMouseLeave}
               className="transition duration-150 ease-in-out cursor-pointer"
             />
@@ -134,12 +163,12 @@ const SvgMap = () => {
             id="filter0_d_202_6687"
             x="0.303223"
             y="0.331116"
-            width="1438.42"
-            height="871.56"
+            width="1500"
+            height="900"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feColorMatrix
               in="SourceAlpha"
               type="matrix"
@@ -169,6 +198,12 @@ const SvgMap = () => {
           <Marker key={index} x={marker.x} y={marker.y} color={marker.color} />
         ))}
       </animated.svg>
+      {showRegionData && selectedRegion && (
+        <RegionData
+          region={selectedRegion}
+          onClose={() => setShowRegionData(false)}
+        />
+      )}
       {hoveredRegion && (
         <div
           className="absolute bg-white p-2 shadow-xl text-lg font-bold text-gray-800"

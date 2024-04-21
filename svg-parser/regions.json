@@ -3,13 +3,15 @@
     "id": "vectormap1_MOW",
     "pathD": "M232.268 363.506L228.358 362.204L223.144 363.506L221.841 368.714L223.144 372.62L228.358 375.224L232.268 372.62L234.875 368.714L232.268 363.506Z",
     "hasInfo": true,
-    "fullName": "Москва"
+    "fullName": "Москва",
+    "img": "../public/Property 1=img_moscow.svg"
   },
   {
     "id": "vectormap1_SPE",
     "pathD": "M238.785 264.554L234.875 263.252L229.661 264.554L228.357 269.762L229.661 273.668L234.875 276.272L238.785 273.668L241.392 269.762L238.785 264.554Z",
     "hasInfo": true,
-    "fullName": "Санкт-Петербуг"
+    "fullName": "Санкт-Петербуг",
+    "img": "../public/Property 1=img_petersburg.svg"
   },
   {
     "id": "vectormap1_YAR",
